@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Add Expense</title>
+
+</head>
+
+<body>
+
+<h2>Add Expense</h2>
+
+<form
+method="POST"
+action="http://127.0.0.1:8000/api/expense/create/">
+
+{% csrf_token %}
+
+<label>Title</label><br>
+<input
+type="text"
+name="title"
+required>
+
+<br><br>
+
+<label>Amount</label><br>
+<input
+type="number"
+name="amount"
+required>
+
+<br><br>
+
+<label>Description</label><br>
+
+<textarea
+name="description"></textarea>
+
+<br><br>
+
+<label>Date</label><br>
+
+<input
+type="date"
+name="date"
+required>
+
+<br><br>
+
+<input
+type="submit"
+value="Save Expense">
+
+<a href="http://127.0.0.1:8000/api/">
+<button
+type="button">
+Cancel
+</button>
+</a>
+
+</form>
+
+</body>
+
+</html>
