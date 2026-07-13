@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
-from .models import Expense, ExpenseUser
+from .models import Expense, ExpenseUser,Budget
 
+from .models import FinancialGoal
 
 class ExpenseUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,4 +16,15 @@ class ExpenseUserSerializer(serializers.ModelSerializer):
 class ExpenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Expense
-        fields = ["id", "user", "title", "amount", "description", "date"]
+        fields = ["id", "user", "title" ,"amount","category", "description", "date"]
+
+class BudgetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Budget
+        fields = "__all__"
+
+class FinancialGoalSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = FinancialGoal
+        fields = "__all__"

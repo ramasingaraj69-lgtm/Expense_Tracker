@@ -1,18 +1,33 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addExpense } from "../redux/expenseSlice";
+import { fetchExpenses } from "../redux/expenseSlice";
+import { fetchBudgets } from "../redux/budgetSlice";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
 function AddExpense() {
 
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
+  
     const { user } = useSelector((state) => state.auth);
 
+const { expenses } = useSelector((state) => state.expense);
+
+const { budgets } = useSelector((state) => state.budget);
+useEffect(() => {
+    if (user) {
+        dispatch(fetchBudgets(user.id));
+        dispatch(fetchExpenses(user.id));
+    }
+}, [dispatch, user]);
     const [formData, setFormData] = useState({
         title: "",
         amount: "",
+        category:"Food",
         description: "",
         date: ""
     });
@@ -58,9 +73,91 @@ function AddExpense() {
             return;
         }
 
-        await dispatch(addExpense({ ...formData, user_id: user?.id }));
+        const action = await dispatch(
+    addExpense({
+        ...formData,
+        user_id: user.id,
+    })
+);
 
-        navigate("/expenses");
+if (action.meta.requestStatus === "fulfilled") {
+
+    const budget = budgets.find(
+        (b) => b.category === formData.category
+    );
+
+    if (budget) {
+
+        const previousSpent = expenses
+            .filter((e) => e.category === formData.category)
+            .reduce((sum, e) => sum + Number(e.amount), 0);
+
+        const totalSpent =
+            previousSpent + Number(formData.amount);
+
+        const budgetAmount = Number(budget.budget);
+
+        const percentage =
+            (totalSpent / budgetAmount) * 100;
+
+        let icon = "success";
+        let title = "Healthy Spending";
+        let status = "You are spending wisely.";
+
+        if (percentage >= 80 && percentage <= 100) {
+            icon = "warning";
+            title = "Near Budget Limit";
+            status = "You're close to your category budget.";
+        }
+
+        if (percentage > 100) {
+            icon = "error";
+            title = "Budget Exceeded";
+            status = `Exceeded by ₹${(
+                totalSpent - budgetAmount
+            ).toFixed(2)}`;
+        }
+
+        await Swal.fire({
+
+            icon,
+
+            title,
+
+            html: `
+                <b>Expense Saved Successfully</b><br><br>
+
+                Category : ${formData.category}<br>
+
+                Budget : ₹${budgetAmount}<br>
+
+                Total Spent : ₹${totalSpent}<br>
+
+                Remaining : ₹${Math.max(
+                    budgetAmount - totalSpent,
+                    0
+                )}<br><br>
+
+                <b>${status}</b>
+            `,
+
+            confirmButtonColor: "#6F4E37",
+
+        });
+    }
+    else {
+
+        await Swal.fire({
+            icon: "success",
+            title: "Expense Added",
+            text: "Expense saved successfully.",
+            confirmButtonColor: "#6F4E37",
+        });
+
+    }
+
+    navigate("/expenses");
+}
 
     };
 
@@ -117,7 +214,46 @@ function AddExpense() {
                         </p>
 
                     </div>
+                    <div className="space-y-3">
+    <label className="block text-sm font-semibold text-[#6F4E37]">
+        Category
+    </label>
 
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+
+        {[
+            "Food",
+            "Travel",
+            "Shopping",
+            "Bills",
+            "Health",
+            "Education",
+            "Entertainment",
+            "Other"
+        ].map((item) => (
+            <label
+                key={item}
+                className={`flex items-center justify-center gap-2 p-3 rounded-lg border cursor-pointer transition
+                ${
+                    formData.category === item
+                        ? "bg-[#6F4E37] text-white border-[#6F4E37]"
+                        : "bg-white border-gray-300 hover:border-[#6F4E37]"
+                }`}
+            >
+                <input
+                    type="radio"
+                    name="category"
+                    value={item}
+                    checked={formData.category === item}
+                    onChange={handleChange}
+                    className="hidden"
+                />
+
+                {item}
+            </label>
+        ))}
+    </div>
+</div>
                     <div className="mb-4">
 
                         <label className="block mb-2 font-semibold">

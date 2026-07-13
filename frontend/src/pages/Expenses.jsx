@@ -247,7 +247,7 @@ function Expenses() {
                                 <th>Title</th>
 
                                 <th>Amount</th>
-
+                                <th>Category</th>
                                 <th>Description</th>
 
                                 <th>Date</th>
@@ -330,7 +330,9 @@ function Expenses() {
                                                         ₹ {expense.amount}
 
                                                     </td>
-
+                                                    <td>
+                                                        {expense.category}
+                                                    </td>
                                                     <td>
 
                                                         {expense.description}

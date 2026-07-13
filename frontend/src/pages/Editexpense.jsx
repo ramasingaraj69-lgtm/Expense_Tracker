@@ -19,6 +19,7 @@ function Editexpense() {
     const [formData, setFormData] = useState({
         title: "",
         amount: "",
+        category: "Food",
         description: "",
         date: "",
     });
@@ -36,6 +37,7 @@ function Editexpense() {
             setFormData({
                 title: expense.title || "",
                 amount: expense.amount || "",
+                category: expense.category || "Food",
                 description: expense.description || "",
                 date: expense.date || "",
             });
@@ -96,7 +98,47 @@ function Editexpense() {
                         value={formData.amount}
                         onChange={handleChange}
                     />
+                    <div className="mb-5">
+    <label className="block mb-2 font-semibold text-[#6F4E37]">
+        Category
+    </label>
 
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+
+        {[
+            "Food",
+            "Travel",
+            "Shopping",
+            "Bills",
+            "Health",
+            "Education",
+            "Entertainment",
+            "Other"
+        ].map((item) => (
+            <label
+                key={item}
+                className={`flex items-center justify-center p-3 rounded-lg border cursor-pointer transition
+                ${
+                    formData.category === item
+                        ? "bg-[#6F4E37] text-white border-[#6F4E37]"
+                        : "bg-white border-gray-300 hover:border-[#6F4E37]"
+                }`}
+            >
+                <input
+                    type="radio"
+                    name="category"
+                    value={item}
+                    checked={formData.category === item}
+                    onChange={handleChange}
+                    className="hidden"
+                />
+
+                {item}
+            </label>
+        ))}
+
+    </div>
+</div>
                     <textarea
                         className="w-full border p-3 rounded mb-4"
                         name="description"
