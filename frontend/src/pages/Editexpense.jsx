@@ -19,6 +19,7 @@ function Editexpense() {
     const [formData, setFormData] = useState({
         title: "",
         amount: "",
+        category: "Food",
         description: "",
         date: "",
     });
@@ -36,6 +37,7 @@ function Editexpense() {
             setFormData({
                 title: expense.title || "",
                 amount: expense.amount || "",
+                category: expense.category || "Food",
                 description: expense.description || "",
                 date: expense.date || "",
             });
@@ -70,18 +72,32 @@ function Editexpense() {
 
     return (
 
-        <div className="min-h-screen bg-slate-100 flex justify-center items-center">
+        <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#FFFDF9] via-[#F8F4EF] to-[#EFE4D2] flex items-center justify-center px-6 py-10">"
+<div className="pointer-events-none absolute inset-0 overflow-hidden">
 
-            <div className="bg-white shadow-xl rounded-xl p-8 w-114">
+    <div className="absolute -left-24 top-20 h-80 w-80 rounded-full bg-[#D9B382]/20 blur-3xl"></div>
 
-                <h2 className="text-3xl font-bold mb-6">
+    <div className="absolute -right-20 bottom-10 h-96 w-96 rounded-full bg-[#8B5E3C]/10 blur-3xl"></div>
+
+</div>
+            <motion.div
+initial={{opacity:0,y:40}}
+animate={{opacity:1,y:0}}
+transition={{duration:.7}}
+className="relative z-10 w-full max-w-2xl rounded-[32px] border border-[#E5D6C6] bg-white/90 p-10 shadow-[0_25px_60px_rgba(74,44,42,.12)] backdrop-blur-xl"
+>
+
+                <h2 className="mb-3 text-center text-5xl font-bold text-[#2D1B14]">
                     Edit Expense
                 </h2>
+                <p className="mb-8 text-center text-[#8B6B56]">
+Update your expense details and keep your finances accurate.
+</p>
 
                 <form onSubmit={handleSubmit}>
 
                     <input
-                        className="w-full border p-3 rounded mb-4"
+                        className="mb-5 w-full rounded-2xl border border-[#D9C4A7] bg-[#FFFDF9] px-5 py-3 text-[#2D1B14] outline-none transition duration-300 focus:border-[#8B5E3C] focus:ring-2 focus:ring-[#C89B5E]/40"
                         name="title"
                         placeholder="Title"
                         value={formData.title}
@@ -89,16 +105,38 @@ function Editexpense() {
                     />
 
                     <input
-                        className="w-full border p-3 rounded mb-4"
+                        className="mb-5 w-full rounded-2xl border border-[#D9C4A7] bg-[#FFFDF9] px-5 py-3 text-[#2D1B14] outline-none transition duration-300 focus:border-[#8B5E3C] focus:ring-2 focus:ring-[#C89B5E]/40"
                         type="number"
                         name="amount"
                         placeholder="Amount"
                         value={formData.amount}
                         onChange={handleChange}
                     />
+                    <div className="mb-6">
 
+    <label className="mb-2 block text-sm font-semibold uppercase tracking-wider text-[#6F4E37]">
+        Category
+    </label>
+
+    <select
+        name="category"
+        value={formData.category}
+        onChange={handleChange}
+        className="w-full rounded-2xl border border-[#D9C4A7] bg-[#FFFDF9] px-5 py-3 text-[#2D1B14] outline-none transition duration-300 focus:border-[#8B5E3C] focus:ring-2 focus:ring-[#C89B5E]/40"
+    >
+        <option value="Food">🍔 Food</option>
+        <option value="Travel">✈️ Travel</option>
+        <option value="Shopping">🛍 Shopping</option>
+        <option value="Bills">📄 Bills</option>
+        <option value="Health">❤️ Health</option>
+        <option value="Education">📚 Education</option>
+        <option value="Entertainment">🎬 Entertainment</option>
+        <option value="Other">📦 Other</option>
+    </select>
+
+</div>
                     <textarea
-                        className="w-full border p-3 rounded mb-4"
+                        className="mb-5 w-full rounded-2xl border border-[#D9C4A7] bg-[#FFFDF9] p-4 outline-none transition duration-300 focus:border-[#8B5E3C] focus:ring-2 focus:ring-[#C89B5E]/40"
                         name="description"
                         placeholder="Description"
                         rows="4"
@@ -107,14 +145,14 @@ function Editexpense() {
                     />
 
                     <input
-                        className="w-full border p-3 rounded mb-6"
+                        className="mb-6 w-full rounded-2xl border border-[#D9C4A7] bg-[#FFFDF9] px-5 py-3 outline-none transition duration-300 focus:border-[#8B5E3C] focus:ring-2 focus:ring-[#C89B5E]/40"
                         type="date"
                         name="date"
                         value={formData.date}
                         onChange={handleChange}
                     />
 
-                    <div className="flex gap-3">
+                    <div className="mt-8 flex gap-4">
 
                         <motion.button
     type="submit"
@@ -144,6 +182,7 @@ function Editexpense() {
         duration-300
         hover:shadow-2xl
         hover:brightness-110
+        hover:-translate-y-1
     "
 >
     <FaEdit />
@@ -153,7 +192,7 @@ function Editexpense() {
                         <button
                             type="button"
                             onClick={() => navigate("/expenses")}
-                            className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700"
+                            className="rounded-2xl border border-[#D9C4A7] bg-white px-8 py-3.5 font-semibold text-[#6F4E37] transition-all duration-300 hover:-translate-y-1 hover:bg-[#EFE4D2]"
                         >
                             Cancel
                         </button>
@@ -162,7 +201,7 @@ function Editexpense() {
 
                 </form>
 
-            </div>
+            </motion.div>
 
         </div>
 

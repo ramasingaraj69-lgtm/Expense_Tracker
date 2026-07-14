@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
+
 import {
     fetchExpenses,
     deleteExpense,
@@ -14,6 +15,7 @@ import {
 } from "react-icons/fa";
 
 import Swal from "sweetalert2";
+import Navbar from "../components/Navbar";
 
 function Expenses() {
 
@@ -75,46 +77,34 @@ function Expenses() {
     );
 
     return (
+        
+<>
+    <Navbar/>
+        <div  className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#FFFDF9] via-[#F8F4EF] to-[#EFE4D2] px-6 py-8">
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
 
-        <div className="min-h-screen bg-slate-100 p-8">
+            <div className="absolute left-0 top-10 h-80 w-80 rounded-full bg-[#D9B382]/20 blur-3xl"></div>
 
-            <div className="max-w-6xl mx-auto">
+            <div className="absolute right-0 bottom-0 h-[420px] w-[420px] rounded-full bg-[#8B5E3C]/10 blur-3xl"></div>
 
-                <div className="flex justify-between items-center mb-8">
-                                  <button
-    type="button"
-    onClick={() => navigate("/home")}
-    className="
-        flex
-        items-center
-        justify-center
-        w-12
-        h-12
-        rounded-full
-        bg-white
-        text-[#6F4E37]
-        shadow-md
-        border
-        border-[#D6C5B4]
-        hover:bg-[#F7F3EF]
-        hover:scale-105
-        transition
-        duration-300
-    "
->
-    <FaArrowLeft className="text-lg" />
-</button>
+            <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F4E6D2]/60 blur-3xl"></div>
+
+            </div>
+            <div className="relative z-10 mx-auto max-w-7xl">
+
+                <div className="flex justify-between items-center mb-8 ">
+                                  
 
                     <div>
       
 
-                        <h1 className="text-4xl font-bold">
+                        <h1 className="text-5xl font-bold  color-white">
 
                             Expense Tracker
 
                         </h1>
 
-                        <p className="text-gray-500 mt-2">
+                        <p className="mt-3 text-lg text-[#8B6B56]">
 
                             Manage all your daily expenses.
 
@@ -133,25 +123,27 @@ function Expenses() {
         scale: 0.97,
     }}
     className="
-        flex
-        items-center
-        gap-3
-        rounded-2xl
-        bg-gradient-to-r
-        from-[#6F4E37]
-        via-[#8B5E3C]
-        to-[#4A2C2A]
-        px-7
-        py-4
-        font-semibold
-        text-white
-        shadow-lg
-        transition-all
-        duration-300
-        hover:shadow-2xl
-    "
+group
+flex
+items-center
+gap-3
+rounded-2xl
+bg-gradient-to-r
+from-[#8B5E3C]
+via-[#6F4E37]
+to-[#4A2C2A]
+px-8
+py-4
+font-semibold
+text-white
+shadow-xl
+transition-all
+duration-300
+hover:-translate-y-2
+hover:shadow-[0_20px_40px_rgba(74,44,42,.35)]
+"
 >
-    <FaPlus />
+    <FaPlus className="transition-transform duration-300 group-hover:rotate-90" />
     Add Expense
 </motion.button>
 
@@ -166,7 +158,7 @@ function Expenses() {
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
     whileHover={{
-        y: -6,
+        y: -10,
         scale: 1.02,
     }}
     className="
@@ -187,7 +179,7 @@ function Expenses() {
 
     <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-[#D8C3A5]/30 blur-3xl"></div>
 
-    <div className="relative flex items-center justify-between">
+    <div className="relative flex items-center justify-between border-[#D9C4A7]">
 
         <div>
 
@@ -234,31 +226,31 @@ function Expenses() {
     </div>
 
 </motion.div>
-                <div className="bg-white rounded-xl shadow overflow-hidden">
-
+                <div  className="overflow-hidden rounded-3xl border border-[#E5D6C6] bg-white/90 backdrop-blur-xl shadow-[0_25px_60px_rgba(74,44,42,.08)]">
+                    <div className="overflow-x-auto">
                     <table className="w-full">
 
-                        <thead className="bg-gradient-to-r from-[#6F4E37] via-[#8B5E3C] to-[#4A2C2A] text-white">
+                        <thead className="bg-gradient-to-r from-[#4A2C2A] via-[#6F4E37] to-[#8B5E3C] text-white">
 
                             <tr>
 
-                                <th className="p-4">ID</th>
+                                <th className="px-6 py-5 text-left text-sm uppercase tracking-widest">ID</th>
 
-                                <th>Title</th>
+                                <th className="px-6 py-5 text-left text-sm uppercase tracking-widest">Title</th>
 
-                                <th>Amount</th>
+                                <th className="px-6 py-5 text-left text-sm uppercase tracking-widest">Amount</th>
+                                <th className="px-6 py-5 text-left text-sm uppercase tracking-widest">Category</th>
+                                <th className="px-6 py-5 text-left text-sm uppercase tracking-widest">Description</th>
 
-                                <th>Description</th>
+                                <th className="px-6 py-5 text-left text-sm uppercase tracking-widest">Date</th>
 
-                                <th>Date</th>
-
-                                <th>Actions</th>
+                                <th className="px-6 py-5 text-left text-sm uppercase tracking-widest">Actions</th>
 
                             </tr>
 
                         </thead>
 
-                        <tbody>
+                        <tbody className="border-b border-[#F1E6D9] transition duration-300 hover:bg-[#FFF9F2]">
 
                             {
 
@@ -330,7 +322,9 @@ function Expenses() {
                                                         ₹ {expense.amount}
 
                                                     </td>
-
+                                                    <td>
+                                                        {expense.category}
+                                                    </td>
                                                     <td>
 
                                                         {expense.description}
@@ -393,12 +387,13 @@ function Expenses() {
                         </tbody>
 
                     </table>
-
+                    </div>
                 </div>
 
             </div>
 
         </div>
+</>
 
     );
 

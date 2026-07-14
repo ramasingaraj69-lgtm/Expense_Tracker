@@ -6,6 +6,9 @@ import Home from "./pages/Home";
 import Expenses from "./pages/Expenses";
 import AddExpense from "./pages/Addexpense";
 import EditExpense from "./pages/Editexpense";
+import Summary from "./pages/Summary";
+import Budget from "./pages/Budget";
+import Analysis from "./pages/Analysis";
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +19,9 @@ function App() {
         <Route path="/expenses" element={<Expenses />} />
         <Route path="/expenses/add" element={<AddExpense />} />
 <Route path="/expenses/edit/:id" element={<EditExpense />} />
+        <Route path="/summary" element={<Summary />} />
+        <Route path="/budget" element={<Budget />} />
+        <Route path='/analysis' element={<Analysis/>}/>
       </Routes>
     </BrowserRouter>
   );
