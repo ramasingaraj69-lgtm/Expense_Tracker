@@ -49,21 +49,43 @@ function BudgetCard({
                 scale: 1.02,
             }}
 
-            className="bg-white rounded-2xl shadow-lg p-6 border border-[#E5D6C6]"
+            className="
+relative
+overflow-hidden
+rounded-[28px]
+border
+border-[#E7D8C7]
+bg-gradient-to-br
+from-[#FFFDF9]
+via-[#FCF7F1]
+to-[#F5EEE4]
+p-7
+shadow-[0_20px_50px_rgba(74,44,42,.12)]
+backdrop-blur-xl
+transition-all
+duration-500
+hover:-translate-y-2
+hover:shadow-[0_30px_70px_rgba(74,44,42,.18)]
+"
 
         >
+<div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#D9B382]/20 blur-3xl"></div>
 
-            <div className="flex justify-between items-center">
+<div className="absolute -left-8 bottom-0 h-24 w-24 rounded-full bg-[#8B5E3C]/10 blur-2xl"></div>
+            <div className="relative flex items-center justify-between">
 
-                <h2 className="text-2xl font-bold text-[#4A2C2A]">
+                <h2 className="text-3xl font-bold tracking-wide text-[#3F291F]">
 
                     {icons[budget.category]} {budget.category}
+                    <p className="mt-2 inline-flex rounded-full bg-[#F3E5D4] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[#8B5E3C]">
+    Monthly Budget
+</p>
 
                 </h2>
 
             </div>
 
-            <div className="mt-5 space-y-2">
+            <div className="relative mt-8 space-y-4 rounded-2xl bg-white/70 p-5 backdrop-blur-sm">
 
                 <p>
 
@@ -99,7 +121,7 @@ function BudgetCard({
 
             <div className="mt-5">
 
-                <div className="w-full h-4 rounded-full bg-gray-200 overflow-hidden">
+                <div className="mt-6 h-4 overflow-hidden rounded-full bg-[#E9DDD0]">
 
                     <div
                         className={`${color} h-full`}
@@ -121,13 +143,28 @@ function BudgetCard({
 
             </div>
 
-            <div className="flex gap-3 mt-6">
+            <div className="relative mt-8 flex gap-4">
 
                 <button
 
                     onClick={() => onEdit(budget)}
 
-                    className="flex-1 bg-[#6F4E37] text-white py-2 rounded-lg hover:bg-[#5b3d2c]"
+                    className="
+flex-1
+rounded-2xl
+bg-gradient-to-r
+from-[#8B5E3C]
+via-[#6F4E37]
+to-[#4A2C2A]
+py-3
+font-semibold
+text-white
+shadow-lg
+transition-all
+duration-300
+hover:-translate-y-1
+hover:shadow-xl
+"
 
                 >
 
@@ -141,7 +178,21 @@ function BudgetCard({
 
                     onClick={() => onDelete(budget.id)}
 
-                    className="flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700"
+                    className="
+flex-1
+rounded-2xl
+bg-gradient-to-r
+from-red-500
+to-red-700
+py-3
+font-semibold
+text-white
+shadow-lg
+transition-all
+duration-300
+hover:-translate-y-1
+hover:shadow-xl
+"
 
                 >
 

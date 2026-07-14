@@ -115,22 +115,28 @@ function Budget() {
         <>
 
             <Navbar />
+<div className="absolute inset-0 bg-gradient-to-br from-[#FFFDF9]/95 via-[#F8F4EF]/90 to-[#EFE4D2]/95 backdrop-blur-[2px]"></div>
+            <div
+    className="relative min-h-screen overflow-hidden bg-cover bg-center bg-fixed"
+    style={{
+        backgroundImage:
+            "url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2000&q=80')",
+    }}
+>
 
-            <div className="min-h-screen bg-slate-100 p-8">
+                <div className="relative z-10 max-w-7xl mx-auto px-6 py-10">
 
-                <div className="max-w-7xl mx-auto">
-
-                    <div className="flex justify-between items-center mb-10">
+                    <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between mb-12">
 
                         <div>
 
-                            <h1 className="text-4xl font-bold text-[#4A2C2A]">
+                            <h1 className="text-5xl font-bold text-[#f1c0bc]">
 
                                 Category Budgets
 
                             </h1>
 
-                            <p className="text-gray-500 mt-2">
+                            <p className="mt-3 max-w-xl text-lg text-[#7B5E4A]">
 
                                 Manage your spending limits
 
@@ -142,7 +148,23 @@ function Budget() {
 
                             onClick={() => setOpenAdd(true)}
 
-                            className="bg-gradient-to-r from-[#6F4E37] to-[#4A2C2A] text-white px-6 py-3 rounded-xl shadow-lg hover:scale-105 transition"
+                            className="
+rounded-2xl
+bg-gradient-to-r
+from-[#8B5E3C]
+via-[#6F4E37]
+to-[#4A2C2A]
+px-8
+py-4
+font-semibold
+text-white
+shadow-xl
+transition-all
+duration-300
+hover:-translate-y-1
+hover:scale-105
+hover:shadow-2xl
+"
 
                         >
 
@@ -172,13 +194,16 @@ function Budget() {
 
                         (
 
-                            <div className="bg-white rounded-xl p-10 text-center shadow">
+                            <div className="rounded-[30px] border border-[#E7D8C7] bg-white/80 p-16 text-center shadow-2xl backdrop-blur-xl">
 
-                                <h2 className="text-2xl font-semibold text-[#4A2C2A]">
+                                <h2 className="text-3xl font-bold text-[#4A2C2A]">
 
                                     No Budgets Added
 
                                 </h2>
+                                <p className="mt-4 text-[#8B6B56]">
+Create your first category budget and start tracking your spending intelligently.
+</p>
 
                             </div>
 
@@ -189,14 +214,15 @@ function Budget() {
                         (
 
                             <div
-                                className="
-                                grid
-                                grid-cols-1
-                                sm:grid-cols-2
-                                lg:grid-cols-3
-                                xl:grid-cols-4
-                                gap-6"
-                            >
+className="
+grid
+grid-cols-1
+sm:grid-cols-2
+lg:grid-cols-3
+xl:grid-cols-4
+gap-8
+"
+>
 
                                 {
 

@@ -112,7 +112,12 @@ if(currentGoal.monthly_income>0){
 
 }
 
-const savingPercentage= currentGoal.monthly_saving===0?0:Math.min(100,(actualSaving/currentGoal.monthly_saving)*100);
+const savingTarget = Number(currentGoal.monthly_saving_goal || 0);
+
+const savingPercentage =
+savingTarget === 0
+    ? 0
+    : Math.min(100, (actualSaving / savingTarget) * 100);
 
 const categoryTotals={};
 
@@ -1006,7 +1011,7 @@ Savings Goal
 
 Target
 
-₹{currentGoal.monthly_saving}
+₹{currentGoal.monthly_saving_goal}
 
 </span>
 
@@ -1096,7 +1101,14 @@ className="rounded-2xl bg-gradient-to-r from-[#6F4E37] to-[#4A2C2A] text-white p
 </div>
 
 </motion.div>
-<FinancialGoalModal />
+
+
+<FinancialGoalModal
+    open={showGoalModal}
+    onClose={() => setShowGoalModal(false)}
+/>
+
+
 </div>
 
 </div>
